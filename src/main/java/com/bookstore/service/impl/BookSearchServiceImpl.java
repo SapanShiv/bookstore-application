@@ -109,7 +109,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 			return extractTitlesFromMediaCoverage(mediaCoverageList, bookTitle);
 		} else {
 			LOGGER.error("Book not found with given isbn: {}", isbn);
-			throw new BusinessException(ResponseErrorCodeEnum.BOOK_NOT_FOUND);
+			throw new ServiceException(ResponseErrorCodeEnum.BOOK_NOT_FOUND);
 		}
 	}
 

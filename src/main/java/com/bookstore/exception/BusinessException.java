@@ -26,7 +26,7 @@ public class BusinessException extends RuntimeException {
 	 * @param errorCodeEnum
 	 */
 	public BusinessException(ResponseErrorCodeEnum errorCodeEnum) {
-		super();
+		super(errorCodeEnum.getDescription()	);
 		this.errorCodeEnum = errorCodeEnum;
 		this.code = String.valueOf(errorCodeEnum.getCode());
 		this.userMessage = errorCodeEnum.getDescription();

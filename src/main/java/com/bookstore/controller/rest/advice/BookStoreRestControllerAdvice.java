@@ -85,8 +85,13 @@ public class BookStoreRestControllerAdvice {
 		List<Error> errors = new ArrayList<>();
 		if (null != businessException.getBindingResult())
 			errors = resolveBindingResultErrors(businessException.getBindingResult());
-
+		else {
+			Error error = new Error(businessException.getCode(), messageSource.getMessage(businessException.getUserMessage(), null, Locale.getDefault()));
+			errors.add(error);
+		}
+		errorResponse.setError(true);
 		errorResponse.setErrorDetails(errors);
+		LOGGER.error("Error deatils: {}", errorResponse);
 		return new ResponseEntity<>(errorResponse, businessException.getErrorCodeEnum().getHttpStatus());
 	}
 
@@ -99,13 +104,14 @@ public class BookStoreRestControllerAdvice {
 	 */
 	@ExceptionHandler(value = { ServiceException.class })
 	public ResponseEntity<ErrorResponseTO> handleServiceException(ServiceException serviceException) {
-		LOGGER.error("Exception occured while serving the request", serviceException.getUserMessage(), serviceException);
+		LOGGER.error("Exception occured while serving the request with message: {}", serviceException.getUserMessage());
 		ErrorResponseTO errorResponse = new ErrorResponseTO();
 		List<Error> errorList = new ArrayList<>();
 		String code = messageSource.getMessage(ErrorConstants.GENERIC_ERROR_CODE, null, Locale.getDefault());
 		String descrption = messageSource.getMessage(ErrorConstants.GENERIC_ERROR_MESSAGE, null, Locale.getDefault());
 		Error error = new Error(code, descrption);
 		errorList.add(error);
+		errorResponse.setError(true);
 		errorResponse.setErrorDetails(errorList);
 		return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -126,6 +132,7 @@ public class BookStoreRestControllerAdvice {
 		String descrption = messageSource.getMessage(ErrorConstants.GENERIC_ERROR_MESSAGE, null, Locale.getDefault());
 		Error error = new Error(code, descrption);
 		errorList.add(error);
+		errorResponse.setError(true);
 		errorResponse.setErrorDetails(errorList);
 		return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.validator.constraints.Length;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookstore.constants.ErrorConstants;
 import com.bookstore.controller.api.BookStoreController;
 import com.bookstore.model.BookStoreTO;
 import com.bookstore.service.BookBuyService;
@@ -82,7 +84,7 @@ public class BookStoreRestController implements BookStoreController {
 	 * com.bookstore.controller.api.BookStoreController#searchBookMediaCoverage(java.lang.String)
 	 */
 	@Override
-	public ResponseEntity<List<String>> searchBookMediaCoverage(String isbn) {
+	public ResponseEntity<List<String>> searchBookMediaCoverage(@Length(min = 13, max = 13, message = ErrorConstants.ISBN_NUMBER_NOT_VALID) String isbn) {
 		LOGGER.info("Search media coverage of the book with isbn: {}", isbn);
 		List<String> mediaCoverageTitles = bookSearchService.searchMediaCoverage(isbn);
 		return new ResponseEntity<>(mediaCoverageTitles, HttpStatus.OK);
@@ -94,7 +96,7 @@ public class BookStoreRestController implements BookStoreController {
 	 * @see com.bookstore.controller.api.BookStoreController#buyBook(java.lang.String)
 	 */
 	@Override
-	public ResponseEntity<String> buyBook(String isbn) {
+	public ResponseEntity<String> buyBook(@Length(min = 13, max = 13, message = ErrorConstants.ISBN_NUMBER_NOT_VALID) String isbn) {
 		LOGGER.info("Buying book with isbn: {}", isbn);
 		String result = bookBuyService.buyBook(isbn);
 		return new ResponseEntity<>(result, HttpStatus.OK);
