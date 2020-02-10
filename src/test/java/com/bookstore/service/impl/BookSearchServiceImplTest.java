@@ -16,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.bookstore.entity.AuthorEntity;
 import com.bookstore.entity.BookEntity;
 import com.bookstore.exception.BusinessException;
+import com.bookstore.exception.ServiceException;
 import com.bookstore.mapper.BookStoreMapper;
 import com.bookstore.model.BookStoreTO;
 import com.bookstore.model.MediaCoverageResponseTO;
@@ -146,7 +147,7 @@ public class BookSearchServiceImplTest {
 	/**
 	 * Test method for searchMediaCoverage throwing Exception.
 	 */
-	@Test(expected = BusinessException.class)
+	@Test(expected = ServiceException.class)
 	public void testsearchMediaCoverageThrowingRecordNotFoundException() {
 		final MediaCoverageResponseTO mediaCoverageResponseTO = prepareMediaCoverageResponseTO();
 		final List<MediaCoverageResponseTO> mediaCoverageResponseTOList = new ArrayList<>();
