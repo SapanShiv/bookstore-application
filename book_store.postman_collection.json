@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "30404582-5f72-44b6-a449-bddd620aa3dc",
+		"name": "book_store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addBook",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"isbn\": \"9781119428110\",\r\n   \"title\": \"Head First Design Patterns\",\r\n   \"authorName\": \"Kathy Sierra\",\r\n   \"price\": 3262,\r\n   \"copies\": 2\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/book/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"book",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "serachBooks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/book?title=Head",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"book"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Head"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchBookMediaCoverage",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/book/media?isbn=9781119559882",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"book",
+						"media"
+					],
+					"query": [
+						{
+							"key": "isbn",
+							"value": "9781119559882"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buyBook",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/book/buy?isbn=9781119428110",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"book",
+						"buy"
+					],
+					"query": [
+						{
+							"key": "isbn",
+							"value": "9781119428110"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

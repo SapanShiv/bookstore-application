@@ -1,0 +1,7 @@
+com\bookstore\validator\BookStoreValidatorImplTest.class
+com\bookstore\repository\CustomBookSearchRepositoryTest.class
+com\bookstore\service\impl\BookBuyServiceImplTest.class
+com\bookstore\service\impl\BookStoreServiceImplTest.class
+com\bookstore\service\impl\BookSearchServiceImplTest.class
+com\bookstore\controller\BookStoreRestControllerTest.class
+com\bookstore\service\impl\MediaCoverageServiceImplTest.class
