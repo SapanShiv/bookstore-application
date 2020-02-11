@@ -29,6 +29,10 @@ This is a book-store java application build with Maven as the build tool and use
 ## Script files for creating database and tables in MySQL
 
 Please refer to the scripts file present in bookstore-application project
+To connect to mysql db execute the below command to create a user with privileges to connect to mysql if it doesn't exist:
+CREATE USER 'root'@'localhost' IDENTIFIED BY 'cafu';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';
+COMMIT;
 
 ### Build
 
