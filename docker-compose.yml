@@ -1,0 +1,30 @@
+version: "3.3"
+services:
+  docker-mysql:
+    image: mysql
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./scripts.sql:/data/application/init.sql
+    restart: always
+    environment:
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=cafu
+        - MYSQL_ROOT_PASSWORD=cafu
+        - MYSQL_DATABASE=BOOK_STORE
+    ports:
+        - 3307:3306
+  book-store:
+    image: shivsapan/book-store:latest
+    ports:
+      - 8081
+    build:
+      context: target
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/BOOK_STORE?autoReconnect=true&useSSL=false
+    depends_on:
+        - docker-mysql
+    
+    
+    
+            
