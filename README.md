@@ -49,4 +49,21 @@ java -jar target/bookstore-application-0.0.1-SNAPSHOT.jar
 ### Postman collection 
 Please refer to book_store.postman_collection.json in bookstore-application project
 
+### Docker commands
+1. To build the image with same name as Dockerfile
+   docker build .
+2. To not allow to build image with the temporary images:
+   docker build --no-cache .
+3. docker-compose up
+4. To not allow to use cache for building the images:
+   docker-compose build --no-cache --pull
+5. To go into the mysql containers:
+   docker exec -it -u root <containerId> bash
+6. To connect to mysql client
+   mysql -u root -p
+7. To moove out of the container:
+   Ctrl+p+q
+8. To see docker container logs:
+   docker container logs <container id>
+
 
