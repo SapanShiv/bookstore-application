@@ -18,7 +18,7 @@ services:
     ports:
       - 8081
     build:
-      context: target
+      context: ./
       dockerfile: Dockerfile
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/BOOK_STORE?autoReconnect=true&useSSL=false
