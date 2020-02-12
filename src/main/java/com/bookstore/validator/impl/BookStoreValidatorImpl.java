@@ -2,8 +2,7 @@ package com.bookstore.validator.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
-
+import org.apache.commons.lang3.StringUtils;
 import com.bookstore.constants.BookStoreConstants;
 import com.bookstore.model.BookStoreTO;
 import com.bookstore.validator.BookStoreValidator;
@@ -38,15 +37,17 @@ public class BookStoreValidatorImpl implements BookStoreValidator {
 	 */
 	@Override
 	public boolean validateAllArgumentsNotNull(String isbn, String title, String author) {
-		return !(StringUtils.isEmpty(isbn) && StringUtils.isEmpty(title) && StringUtils.isEmpty(author));
+		return StringUtils.isNotEmpty(isbn) && StringUtils.isNotEmpty(title) && StringUtils.isNotEmpty(author);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.bookstore.validator.BookStoreValidator#validateIsbn(java.lang.String)
 	 */
 	@Override
 	public boolean validateIsbn(String isbn) {
-		return !(StringUtils.isEmpty(isbn) || isbn.length()!=Integer.parseInt(BookStoreConstants.THIRTEEN_CONSTANT));
+		return !(StringUtils.isEmpty(isbn) || isbn.length() != Integer.parseInt(BookStoreConstants.THIRTEEN_CONSTANT));
 	}
 
 }

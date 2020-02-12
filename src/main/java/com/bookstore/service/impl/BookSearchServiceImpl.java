@@ -77,10 +77,12 @@ public class BookSearchServiceImpl implements BookSearchService {
 	 */
 	@Override
 	public List<BookStoreTO> searchBooks(String isbn, String title, String author) {
-		LOGGER.debug("Books are searched based on isbn: {}, title: {}, author: {}", isbn, title, author);
+		
 		if (bookStoreValidator.validateAllArgumentsNotNull(isbn, title, author)) {
+			LOGGER.info("Books search arguments validated based on isbn: {}, title: {}, author: {}", isbn, title, author);
 			List<BookEntity> bookEntityList = bookSearchRepository.searchBooks(isbn, title, author);
 			if (CollectionUtils.isEmpty(bookEntityList)) {
+				LOGGER.info("Book not found with given isbn: {}", isbn);
 				throw new ServiceException(ResponseErrorCodeEnum.BOOK_NOT_FOUND);
 			}
 			return bookStoreMapper.bookStoreEntityListToBookStoreTOList(bookEntityList);
@@ -100,6 +102,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 		LOGGER.info("Searching media coverage titles with isbn number: {}", isbn);
 		final List<MediaCoverageResponseTO> mediaCoverageList = mediaCoverageService.getMediaCoverage();
 		if (!bookStoreValidator.validateIsbn(isbn)) {
+			LOGGER.error("Isbn entered: {} is not valid", isbn);
 			throw new BusinessException(ResponseErrorCodeEnum.ISBN_NUMBER_NOT_VALID);
 		}
 		Optional<String> title = bookRepository.findTitleByIsbn(isbn);

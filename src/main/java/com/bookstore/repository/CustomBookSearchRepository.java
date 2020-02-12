@@ -8,6 +8,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +26,11 @@ import com.bookstore.entity.BookEntity;
 public class CustomBookSearchRepository implements BookSearchRepository {
 
 	/**
+	 * Logger instance.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(CustomBookSearchRepository.class);
+
+	/**
 	 * EntityManager instance.
 	 */
 	@Autowired
@@ -37,6 +44,7 @@ public class CustomBookSearchRepository implements BookSearchRepository {
 	 */
 	@Override
 	public List<BookEntity> searchBooks(String isbn, String title, String author) {
+		LOGGER.info("Books being searched on the basis of isbn: {}, title: {}, author:{}", isbn, title, author);
 		final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		final CriteriaQuery<BookEntity> cq = cb.createQuery(BookEntity.class);
 		final Root<BookEntity> root = cq.from(BookEntity.class);

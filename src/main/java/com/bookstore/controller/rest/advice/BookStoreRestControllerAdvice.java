@@ -91,7 +91,7 @@ public class BookStoreRestControllerAdvice {
 		}
 		errorResponse.setError(true);
 		errorResponse.setErrorDetails(errors);
-		LOGGER.error("Error deatils: {}", errorResponse);
+		LOGGER.error("Error details: {}", errorResponse);
 		return new ResponseEntity<>(errorResponse, businessException.getErrorCodeEnum().getHttpStatus());
 	}
 
